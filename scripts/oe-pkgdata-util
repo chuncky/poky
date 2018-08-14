@@ -279,10 +279,10 @@ def lookup_recipe(args):
                 parse_pkgdatafile(pkgdatafile)
             continue
         pkgdatafile = os.path.join(args.pkgdata_dir, 'runtime-reverse', pkg)
-        if not os.path.exists(pkgdatafile):
-            logger.error("The following packages could not be found: %s" % pkg)
-            sys.exit(1)
-        parse_pkgdatafile(pkgdatafile)
+        if os.path.exists(pkgdatafile):
+            parse_pkgdatafile(pkgdatafile)
+        else:
+            print("The following packages could not be found: %s" % pkg)
 
 def package_info(args):
     def parse_pkgdatafile(pkgdatafile):
